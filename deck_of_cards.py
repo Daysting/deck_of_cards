@@ -57,6 +57,9 @@ def main():
     print("="*50)
     deck = Deck()
     print(deck)
+    print("="*50)
+    print("Shuffling the deck...")
+    print("="*50)
     deck.shuffle()
 
     # let the user choose how many cards to deal
@@ -66,7 +69,9 @@ def main():
         print("Invalid number, dealing 5 cards by default.")
         how_many = 5
 
+    print("="*50)
     print(f"Dealing your {how_many} cards:")
+    print("="*50)
     dealt_cards = deck.deal_cards(how_many)
     if dealt_cards:
         for card in dealt_cards:
@@ -74,7 +79,9 @@ def main():
     else:
         print("No cards were dealt.")
 
+    print("="*50)
     print(deck)
+    print("="*50)
 
 # The entry point of the program calls the main function to execute the card game demonstration.
 if __name__ == "__main__":
