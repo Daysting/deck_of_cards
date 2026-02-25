@@ -47,7 +47,7 @@ class Deck:
         return dealt
 
     def __str__(self):
-        return f"Deck of {len(self.cards)} cards"
+        return f"There are {len(self.cards)} remaining cards"
     
 # The main function demonstrates creating a deck, shuffling it, and dealing a few cards while showing the remaining cards in the deck.    
 def main():
@@ -62,26 +62,39 @@ def main():
     print("="*50)
     deck.shuffle()
 
-    # let the user choose how many cards to deal
-    try:
-        how_many = int(input("How many cards would you like to deal? "))
-    except ValueError:
-        print("Invalid number, dealing 5 cards by default.")
-        how_many = 5
+    # loop so the user can deal multiple times until they quit or deck is empty
+    while True:
+        # let the user choose how many cards to deal
+        try:
+            how_many = int(input("How many cards would you like to deal? "))
+        except ValueError:
+            print("Invalid number, dealing 5 cards by default.")
+            how_many = 5
 
-    print("="*50)
-    print(f"Dealing your {how_many} cards:")
-    print("="*50)
-    dealt_cards = deck.deal_cards(how_many)
-    if dealt_cards:
-        for card in dealt_cards:
-            print(card)
-    else:
-        print("No cards were dealt.")
+        print("="*50)
+        print(f"Dealing your {how_many} cards:")
+        print("="*50)
+        dealt_cards = deck.deal_cards(how_many)
+        if dealt_cards:
+            for card in dealt_cards:
+                print(card)
+        else:
+            print("No cards were dealt.")
 
-    print("="*50)
-    print(deck)
-    print("="*50)
+        print("="*50)
+        print(deck)
+        print("="*50)
+
+        # stop if the deck is empty
+        if not deck.cards:
+            print("The deck is empty. Thanks for playing!")
+            break
+
+        # ask whether the user wants to continue
+        cont = input("Deal more cards? (y/n): ").strip().lower()
+        if cont not in ('y', 'yes'):
+            print("Goodbye!")
+            break
 
 # The entry point of the program calls the main function to execute the card game demonstration.
 if __name__ == "__main__":
