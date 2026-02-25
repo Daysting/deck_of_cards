@@ -30,21 +30,50 @@ class Deck:
     def deal_card(self):
         return self.cards.pop() if self.cards else None
 
+    def deal_cards(self, count):
+        """Deal a specific number of cards from the deck.
+
+        Returns a list of Card objects. If the deck runs out of cards before
+        reaching the requested count, the list will contain as many cards as
+        possible.
+        """
+        dealt = []
+        for _ in range(count):
+            card = self.deal_card()
+            if card:
+                dealt.append(card)
+            else:
+                break
+        return dealt
+
     def __str__(self):
         return f"Deck of {len(self.cards)} cards"
     
 # The main function demonstrates creating a deck, shuffling it, and dealing a few cards while showing the remaining cards in the deck.    
 def main():
+    # display program title
+    print("="*50)
+    print("=== Welcome to the Card Dealer ===")
+    print("="*50)
     deck = Deck()
     print(deck)
     deck.shuffle()
-    print("Dealing cards:")
-    for _ in range(5):
-        card = deck.deal_card()
-        if card:
+
+    # let the user choose how many cards to deal
+    try:
+        how_many = int(input("How many cards would you like to deal? "))
+    except ValueError:
+        print("Invalid number, dealing 5 cards by default.")
+        how_many = 5
+
+    print(f"Dealing your {how_many} cards:")
+    dealt_cards = deck.deal_cards(how_many)
+    if dealt_cards:
+        for card in dealt_cards:
             print(card)
-        else:
-            print("No more cards to deal.")
+    else:
+        print("No cards were dealt.")
+
     print(deck)
 
 # The entry point of the program calls the main function to execute the card game demonstration.
