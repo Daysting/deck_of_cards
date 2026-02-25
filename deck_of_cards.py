@@ -92,6 +92,7 @@ def main():
 
         # ask whether the user wants to continue
         cont = input("Deal more cards? (y/n): ").strip().lower()
+        print("="*50)
         if cont not in ('y', 'yes'):
             print("Goodbye!")
             break
